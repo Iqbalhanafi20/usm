@@ -775,23 +775,12 @@ function saved_answers($rid){
 	}
 
 	// perhitungan beasiswa
-	// when rata >=87.5 then '%100%'  
-	// when rata >=75 then '%75%'  
-	// when rata >=60 then '%50%'  
-	// when rata >=47.5 then '%25%'
-	// else 'tidak ada'
 	$nilai = number_format($percentage_obtained,1);
-	// diatas 95%
-	if($nilai>=95.0){
-		$bea = '100%';
-		// diatas 90 dan dibawah 96
-	}elseif($nilai>90.0 && $nilai<95.0){
-		$bea = '75%';
-		// diatas 84 dan dibawah 91
-	}elseif($nilai>=85.0 && $nilai<=90.0){
+	// diatas 85% maka akan mendapat diskon 50%
+	if($nilai>=85.0){
 		$bea = '50%';
-		// diatas 49 dan dibawah 85
-	}elseif($nilai>=50.0 && $nilai<85.0){
+		// diatas 60 dan dibawah 85
+	}elseif($nilai>=60.0 && $nilai<85.0){
 		$bea = '25%';
 	}else{
 		$bea = 'tidak ada';

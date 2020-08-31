@@ -20,7 +20,7 @@
 <table class="table table-bordered">
 <tr>
 <th>Event name</th>
-<th>Date</th>
+<th>Input Date</th>
 <th>Action</th>
 </tr>
 <?php 
