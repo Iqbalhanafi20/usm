@@ -48,6 +48,10 @@ Class Result_model extends CI_Model
 	 
  }
 
+ public function get_event($eid){
+	 return $this->db->query("SELECT * from savsoft_event where id='$eid'")->result();
+ }
+
  function get_user($email){
 	$query=$this->db->query("select * from savsoft_users where email='$email'");
 	 return $query->result();
@@ -112,6 +116,7 @@ return $query->result_array();
 		$this->db->join('savsoft_users','savsoft_users.uid=savsoft_result.uid');
 		$this->db->join('savsoft_group','savsoft_group.gid=savsoft_users.gid');
 		$this->db->join('savsoft_quiz','savsoft_quiz.quid=savsoft_result.quid');
+		$this->db->join('savsoft_event','savsoft_event.id=savsoft_users.eid');
 		$query=$this->db->get('savsoft_result');
 		return $query->result_array();
  }

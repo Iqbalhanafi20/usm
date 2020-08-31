@@ -99,7 +99,9 @@ foreach($group_list as $gk => $group){
  <option value="<?php echo $this->lang->line('pending');?>" <?php if($status==$this->lang->line('pending')){ echo 'selected'; } ?> ><?php echo $this->lang->line('pending');?></option>
  </select>
  </th>
+ <th>Event</th>
  <th><?php echo $this->lang->line('percentage_obtained');?></th>
+ <th>Beasiswa</th>
 <th><?php echo $this->lang->line('action');?> </th>
 </tr>
 <?php 
@@ -116,21 +118,34 @@ if(count($result)==0){
 foreach($result as $key => $val){
 ?>
 <tr>
- <td><?php echo $val['rid'];?></td>
-<td><?php echo $val['first_name'];?> <?php echo $val['last_name'];?></td>
- <td><?php echo $val['quiz_name'];?></td>
- <td><?php echo $val['result_status'];?></td>
- <td><?php echo $val['percentage_obtained'];?>%</td>
-<td>
-<a href="<?php echo site_url('result/view_result/'.$val['rid']);?>" class="btn btn-success" ><?php echo $this->lang->line('view');?> </a>
-<?php 
-if($logged_in['su']=='1'){
+	<td><?php echo $val['rid'];?></td>
+	<td><?php echo $val['first_name'];?> <?php echo $val['last_name'];?></td>
+	<td><?php echo $val['quiz_name'];?></td>
+	<td><?php echo $val['result_status'];?></td>
+	<td>
+	<?php 
+	$query = $this->result_model->get_event($val['eid']);
+	foreach($query as $vq);
+	if($val['eid']==0){
+		echo "";
+	}else{
+		echo $vq->event;
+	}
+
 	?>
-	<a href="javascript:remove_entry('result/remove_result/<?php echo $val['rid'];?>');"><img src="<?php echo base_url('images/cross.png');?>"></a>
-<?php 
-}
-?>
-</td>
+	</td>
+	<td><?php echo number_format($val['percentage_obtained'],1);?>%</td>
+	<td><?php echo $val['beasiswa'];?></td>
+	<td>
+	<a href="<?php echo site_url('result/view_result/'.$val['rid']);?>" class="btn btn-success" ><?php echo $this->lang->line('view');?> </a>
+	<?php 
+	if($logged_in['su']=='1'){
+		?>
+		<a href="javascript:remove_entry('result/remove_result/<?php echo $val['rid'];?>');"><img src="<?php echo base_url('images/cross.png');?>"></a>
+	<?php 
+	}
+	?>
+	</td>
 </tr>
 
 <?php 

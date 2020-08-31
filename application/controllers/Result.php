@@ -122,9 +122,9 @@ class Result extends CI_Controller {
 		$quid=$this->input->post('quid');
 		$gid=$this->input->post('gid');
 		$result=$this->result_model->generate_report($quid,$gid);
-		$csvdata=$this->lang->line('result_id').",".$this->lang->line('email').",".$this->lang->line('first_name').",".$this->lang->line('last_name').",".$this->lang->line('group_name').",".$this->lang->line('quiz_name').",".$this->lang->line('score_obtained').",".$this->lang->line('percentage_obtained').",".$this->lang->line('status')."\r\n";
+		$csvdata=$this->lang->line('result_id').",".$this->lang->line('email').",".$this->lang->line('first_name').",".$this->lang->line('last_name').",".$this->lang->line('group_name').",".$this->lang->line('quiz_name').",".$this->lang->line('score_obtained').",".$this->lang->line('percentage_obtained').",".$this->lang->line('status').","."Event".","."Jurusan yang diinginkan".","."Potongan Beasiswa"."\r\n";
 		foreach($result as $rk => $val){
-		$csvdata.=$val['rid'].",".$val['email'].",".$val['first_name'].",".$val['last_name'].",".$val['group_name'].",".$val['quiz_name'].",".$val['score_obtained'].",".$val['percentage_obtained'].",".$val['result_status']."\r\n";
+		$csvdata.=$val['rid'].",".$val['email'].",".$val['first_name'].",".$val['last_name'].",".$val['group_name'].",".$val['quiz_name'].",".$val['score_obtained'].",".$val['percentage_obtained'].",".$val['result_status'].",".$val['event'].",".$val['jurusan_ingin'].",".$val['beasiswa']."\r\n";
 		}
 		$filename=time().'.csv';
 		force_download($filename, $csvdata);
