@@ -1,0 +1,1 @@
+{"result":{"text":"cube root of 16 space end root space plus space square root of 4 space equals......."},"status":"ok"}

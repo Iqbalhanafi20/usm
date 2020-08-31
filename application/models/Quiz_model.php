@@ -52,6 +52,26 @@ Class Quiz_model extends CI_Model
 		
 	 
  }
+
+ function cek_result($uid,$quid){
+	$query=$this->db->query("select * from savsoft_result where uid='$uid' and quid='$quid' and (result_status='Pass' or result_status='Fail')");
+	 return $query->result();
+ }
+
+ function list_event(){
+	$query=$this->db->query("select * from savsoft_event");
+	 return $query->result();
+ }
+
+ function list_jurusan(){
+	$query=$this->db->query("select * from jurusan order by idprogm");
+	 return $query->result();
+ }
+
+ function get_event($id){
+	$query=$this->db->query("select * from savsoft_event where id='$id'");
+	 return $query->result();
+ }
  
   function quizstat($stat){
 	
@@ -753,12 +773,39 @@ function saved_answers($rid){
 		$qr=$this->lang->line('fail');
 		
 	}
+
+	// perhitungan beasiswa
+	// when rata >=87.5 then '%100%'  
+	// when rata >=75 then '%75%'  
+	// when rata >=60 then '%50%'  
+	// when rata >=47.5 then '%25%'
+	// else 'tidak ada'
+	$nilai = number_format($percentage_obtained,1);
+	// diatas 95%
+	if($nilai>=95.0){
+		$bea = '100%';
+		// diatas 90 dan dibawah 96
+	}elseif($nilai>90.0 && $nilai<95.0){
+		$bea = '75%';
+		// diatas 84 dan dibawah 91
+	}elseif($nilai>=85.0 && $nilai<=90.0){
+		$bea = '50%';
+		// diatas 49 dan dibawah 85
+	}elseif($nilai>=50.0 && $nilai<85.0){
+		$bea = '25%';
+	}else{
+		$bea = 'tidak ada';
+	}
+
+
 	 $userdata=array(
-	  'total_time'=>$total_time,
-	   'end_time'=>time(),
-	  'score_obtained'=>$marks,
+	 'total_time'=>$total_time,
+	 'end_time'=>time(),
+	 'score_obtained'=>$marks,
 	 'percentage_obtained'=>$percentage_obtained,
-	 'manual_valuation'=>$manual_valuation
+	 'manual_valuation'=>$manual_valuation,
+	 'beasiswa'=>$bea,
+	 'date_result'=>date("Y-m-d H:i:s")
 	 );
 	 if($manual_valuation == 1){
 		 $userdata['result_status']=$this->lang->line('pending');

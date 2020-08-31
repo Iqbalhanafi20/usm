@@ -1,0 +1,1 @@
+{"result":{"text":"cube root of 8 plus square root of 16 end root"},"status":"ok"}

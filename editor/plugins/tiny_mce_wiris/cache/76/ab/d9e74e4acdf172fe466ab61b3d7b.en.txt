@@ -1,0 +1,1 @@
+{"result":{"text":"cube root of 8 space plus square root of 16 space equals space......"},"status":"ok"}

@@ -19,7 +19,7 @@ class Login extends CI_Controller {
 	   $this->load->library('email');
 	   $this->load->database();
 	   $this->load->model("user_model");
-	    $this->load->model("quiz_model");
+	   $this->load->model('quiz_model');
 	   $this->lang->load('basic', $this->config->item('language'));
 		if($this->db->database ==''){
 		$this->load->helper('url');
@@ -34,6 +34,13 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
+
+	if($_SERVER['HTTPS']!="on")
+  {
+     $redirect= "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+     header("Location:$redirect");
+  }
+// end
 		
 		$this->load->helper('url');
 		if($this->session->userdata('logged_in')){
@@ -57,11 +64,20 @@ class Login extends CI_Controller {
 			   $data['captcha_img'] = $this->get_captcha();
                 // $this->load->view('view_login', $data);
                $this->load->view('login', $data);
-        	}
+        }
 
 		
 		// $this->load->view('login',$data);
 		 
+	}
+
+	public function download($id=""){
+		$this->load->helper('download');
+		if($id==1){
+			force_download('upload/TATA_CARA_PELAKSANAAN_UJIAN_SARINGAN_MASUK.pdf', NULL);
+		}else{
+			force_download('upload/TATA_CARA_PENDAFTARAN_AKUN_BARU_USM.pdf', NULL);
+		}
 	}
 
 	// create captcha
@@ -77,7 +93,7 @@ class Login extends CI_Controller {
                         'img_height' => 44,
                         'border'     => 0, 
                         'word_length'=> 4,
-                        'font_path'  => '.system/fonts/texb.ttf',
+                        'font_path'  => './system/fonts/texb.ttf',
                         'expiration' => 3600, //1 houre,
                         'pool'       => '0123456789',
                         'colors'     => array(
@@ -186,6 +202,8 @@ class Login extends CI_Controller {
 		$data['custom_form']=$this->user_model->custom_form('Registration');
 		// fetching group list
 		$data['group_list']=$this->user_model->group_list();
+		$data['eve'] = $this->quiz_model->list_event();
+		$data['jur'] = $this->quiz_model->list_jurusan();
 		$this->load->view('header',$data);
 		$this->load->view('register',$data);
 		$this->load->view('footer',$data);
@@ -369,6 +387,7 @@ class Login extends CI_Controller {
 		
 		
 	}
+	
 	
 		
 	function verify($vcode){

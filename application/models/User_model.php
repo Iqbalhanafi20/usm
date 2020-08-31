@@ -220,6 +220,22 @@ return $revenue;
 			return false;
 		}
  }
+
+ function update_event($id){
+ 
+	$userdata=array(
+   'event'=>$this->input->post('event_name'),
+   'date'=>$this->input->post('date_event')
+   );
+   $this->db->where('id',$id);
+   if($this->db->update('savsoft_event',$userdata)){
+	   
+	   return true;
+   }else{
+	   
+	   return false;
+   }
+}
  
  
  function get_group($gid){
@@ -396,7 +412,9 @@ return $revenue;
 		'contact_no'=>$this->input->post('contact_no'),
 		'gid'=>$this->input->post('gid'),
 		'subscription_expired'=>strtotime($this->input->post('subscription_expired')),
-		'su'=>$this->input->post('su')		
+		'su'=>$this->input->post('su'),
+		'eid'=>$this->input->post('eventid'),
+		'jurusan_ingin'=>$this->input->post('jurusan')		
 		);
 		
 		 if($logged_in['uid'] != '1'){
@@ -449,14 +467,16 @@ return $revenue;
 		'last_name'=>$this->input->post('last_name'),
 		'contact_no'=>$this->input->post('contact_no'),
 		'gid'=>implode(',',$this->input->post('gid')),
-		'su'=>'2'		
+		'su'=>'2',
+		'eid'=>$this->input->post('eventid'),
+		'jurusan_ingin'=>$this->input->post('jurusan')		
 		);
 		$veri_code=rand('1111','9999');
 		 if($this->config->item('verify_email')){
 			//  verifikasi email
-			$userdata['verify_code']=$veri_code;
+			// $userdata['verify_code']=$veri_code;
 			// not verifikasi email
-			// $userdata['verify_code']=0;
+			$userdata['verify_code']=0;
 		 }
 		 		if($this->session->userdata('logged_in_raw')){
 					$userraw=$this->session->userdata('logged_in_raw');
@@ -486,88 +506,49 @@ return $revenue;
 
 		if($rresult){
 // for send email
-			 if($this->config->item('verify_email')){
-				 // send verification link in email
+// if($this->config->item('verify_email')){
+// // send verification link in email
 				 
-$verilink=site_url('login/verify/'.$veri_code);
+// $verilink=site_url('login/verify/'.$veri_code);
 
-// send email lama
-//  $this->load->library('email');
-//  if($this->config->item('protocol')=="smtp"){
-// 			$config = array();
-// 			$config['protocol'] = 'smtp';
-// 			$config['smtp_host'] = $this->config->item('smtp_hostname');
-// 			$config['smtp_user'] = $this->config->item('smtp_username');
-// 			$config['smtp_pass'] = $this->config->item('smtp_password');
-// 			$config['smtp_port'] = $this->config->item('smtp_port');
-// 			$config['smtp_timeout'] = $this->config->item('smtp_timeout');
-// 			$config['mailtype'] = $this->config->item('smtp_mailtype');
-// 			$config['starttls']  = $this->config->item('starttls');
-// 			$config['newline']  = $this->config->item('newline');
-// 			$this->email->initialize($config);
-// 		}
+// // send email baru
+// //Load email library
+// $this->load->library('email');
 
-// 			$fromemail=$this->config->item('fromemail');
-// 			$fromname=$this->config->item('fromname');
-// 			$subject=$this->config->item('activation_subject');
-// 			$message=$this->config->item('activation_message');;
-			
-// 			$message=str_replace('[verilink]',$verilink,$message);
-		
-// 			$toemail=$this->input->post('email');
-			 
-// 			$this->email->to($toemail);
-// 			$this->email->from($fromemail, $fromname);
-// 			$this->email->subject($subject);
-// 			$this->email->message($message);
-// 			if(!$this->email->send()){
-// 			 print_r($this->email->print_debugger());
-// 			exit;
-// 			}
-
-// send email baru
-//Load email library
-$this->load->library('email');
-
-//SMTP & mail configuration
-$config = array(
-	'protocol'  => 'smtp',
-	'smtp_host' => $this->config->item('smtp_hostname'),
-	'smtp_port' => $this->config->item('smtp_port'),
-	'smtp_user' => $this->config->item('smtp_username'),
-	'smtp_pass' => $this->config->item('smtp_password'),
-	'mailtype'  => 'html',
-	'charset'   => 'utf-8'
-);
-$this->email->initialize($config);
-$this->email->set_mailtype("html");
-$this->email->set_newline("\r\n");
+// //SMTP & mail configuration
+// $config = array(
+// 	'protocol'  => 'smtp',
+// 	'smtp_host' => $this->config->item('smtp_hostname'),
+// 	'smtp_port' => $this->config->item('smtp_port'),
+// 	'smtp_user' => $this->config->item('smtp_username'),
+// 	'smtp_pass' => $this->config->item('smtp_password'),
+// 	'mailtype'  => 'html',
+// 	'charset'   => 'utf-8'
+// );
+// $this->email->initialize($config);
+// $this->email->set_mailtype("html");
+// $this->email->set_newline("\r\n");
 
 // //Email content
-// $htmlContent = '<h1>Sending email via SMTP server</h1>';
-// $htmlContent .= '<p>This email has sent via SMTP server from CodeIgniter application.</p>';
-$fromemail=$this->config->item('fromemail');
-$fromname=$this->config->item('fromname');
-$subject=$this->config->item('activation_subject');
-$message=$this->config->item('activation_message');;
+// $fromemail=$this->config->item('fromemail');
+// $fromname=$this->config->item('fromname');
+// $subject=$this->config->item('activation_subject');
+// $message=$this->config->item('activation_message');;
 			
-$message=str_replace('[verilink]',$verilink,$message);
+// $message=str_replace('[verilink]',$verilink,$message);
 
-$this->email->to($this->input->post('email'));
-// $this->email->from('system@kwikkiangie.ac.id','MyWebsite');
-$this->email->from($fromemail, $fromname);
-// $this->email->subject('How to send email via SMTP server in CodeIgniter');
-$this->email->subject($subject);
-// $this->email->message($htmlContent);
-$this->email->message($message);
+// $this->email->to($this->input->post('email'));
+// $this->email->from($fromemail, $fromname);
+// $this->email->subject($subject);
+// $this->email->message($message);
 
-if(!$this->email->send()){
-				 print_r($this->email->print_debugger());
-				exit;
-				}
+// if(!$this->email->send()){
+// 				 print_r($this->email->print_debugger());
+// 				exit;
+// 				}
 			 
 				 
-			 }
+// 			 }
 			//  end sending email
 			 
 			return true;
@@ -777,6 +758,19 @@ $new_password=rand('1111','9999');
 	 
 	 
  }
+
+ function remove_event($gid){
+	 
+	$this->db->where('id',$gid);
+	if($this->db->delete('savsoft_event')){
+		return true;
+	}else{
+		
+		return false;
+	}
+	
+	
+}
  
  
  
@@ -809,6 +803,23 @@ $query=$this->db->get('savsoft_users');
 		}
 	 
  }
+
+ function insert_event(){
+	 
+	$userdata=array(
+   'event'=>$this->input->post('event_name'),
+   'date'=>$this->input->post('date_event')
+	   );
+   
+   if($this->db->insert('savsoft_event',$userdata)){
+	   
+	   return true;
+   }else{
+	   
+	   return false;
+   }
+
+}
  
  
  function get_expiry($gid){

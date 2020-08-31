@@ -137,9 +137,8 @@ if($lkey==0){
 					<label for="inputEmail"  ><?php echo $this->lang->line('options');?> <?php echo ($key+1);?>) <?php echo ' : '.$la;?></label> <br>
 					<?php 
 					if($lkey==0){ 
-					?><input type="radio" name="score" value="<?php echo $key;?>" <?php if($val['score']==1){ echo 'checked'; } ?> > Select Correct Option
-					<?php } ?>
-					<br>
+					?><input type="radio" name="score" value="<?php echo $key;?>" <?php if($val['score']==1){ echo 'checked'; } ?> > Select Correct Option 
+					<?php } ?><br>
 					<textarea  name="option<?php echo $lno;?>[]"  class="form-control"  ><?php echo $val['q_option'.$lno];?></textarea>
 			</div>
 			</div>

@@ -56,6 +56,33 @@
 					</select>
 			</div>
 			<div class="form-group">	 
+					<label   >Select Event</label> 
+					<select class="form-control" name="eventid"  required>
+					<?php 
+					foreach($eve as $val){
+						?>
+						
+					<option value="<?php echo $val->id;?>"><?php echo $val->event;?></option>
+						<?php 
+					}
+					?>
+					</select>
+				</div>
+
+				<div class="form-group">	 
+					<label   >Jurusan Yang Diinginkan</label> 
+					<select class="form-control" name="jurusan"  required>
+					<?php 
+					foreach($jur as $val){
+						?>
+						
+					<option value="<?php echo $val->meprogdi;?>"><?php echo $val->meprogdi." (".$val->idprogm.")";?></option>
+						<?php 
+					}
+					?>
+					</select>
+				</div>
+			<div class="form-group">	 
 					<label for="inputEmail"  ><?php echo $this->lang->line('subscription_expired');?></label> 
 					<input type="text" name="subscription_expired"  id="subscription_expired" class="form-control" placeholder="<?php echo $this->lang->line('subscription_expired');?>"    autofocus>
 			</div>

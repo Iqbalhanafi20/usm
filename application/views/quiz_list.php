@@ -123,6 +123,11 @@ if(count($result)==0){
 	<?php
 }
 foreach($result as $key => $val){
+	$logged_in=$this->session->userdata('logged_in');
+	$uid=$logged_in['uid'];
+
+	$cek = $this->quiz_model->cek_result($uid, $val['quid']);
+	foreach($cek as $vall);
 ?>
 <tr>
  <td><?php echo $val['quid'];?></td>
@@ -131,11 +136,18 @@ foreach($result as $key => $val){
  <td>
  <?php 
  if($val['quiz_price'] == 0 || in_array($val['quid'],$purchased_quiz)){
-if($val['end_date'] >=time()){	 ?>
+if($val['end_date'] >=time()){	 
+	if(count($cek)==1){
+		?>
+		<a href="<?php echo site_url('result/view_result/'.$vall->rid);?>" class="btn btn-warning"  >Result</a>
+		<?php
+	}else{
+	?>
 	 
 <a href="<?php echo site_url('quiz/quiz_detail/'.$val['quid']);?>" class="btn btn-success"  ><?php echo $this->lang->line('attempt');?> </a>
 
 <?php
+	}
 }
 if($val['end_date'] < time()){	 ?>
 	 

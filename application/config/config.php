@@ -661,7 +661,7 @@ $config['result_subject'] = $csetting['Result_email_subject'];
 // email send from
 $config['fromemail']=$csetting['SMTP_username'];
 // from name
-$config['fromname']="Administrator - Quiz Portal";
+$config['fromname']="Administrator - USM Online";
 
 
 

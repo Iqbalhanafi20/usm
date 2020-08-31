@@ -1,5 +1,5 @@
 <?php 
-		// $sq_base_url='http://usm.kwikkiangie.ac.id/';
+		// $sq_base_url='https://usm.kwikkiangie.ac.id/';
 		// $sq_hostname='localhost';
 		// $sq_dbname='simulasi_softsav';
 		// $sq_dbusername='simulasi_0940';

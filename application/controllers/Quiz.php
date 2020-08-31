@@ -46,6 +46,7 @@ class Quiz extends CI_Controller {
 		$data['title']=$this->lang->line('quiz');
 		// fetching quiz list
 		$data['purchased_quiz']=$this->quiz_model->get_purchased_quiz();
+		$data['cekstatus'] =
 		$data['result']=$this->quiz_model->quiz_list($limit,$stat);
 	 	$data['archived']=$this->quiz_model->quizstat('archived');
 		$data['active']=$this->quiz_model->quizstat('active');
@@ -759,7 +760,6 @@ function open_quiz($limit='0'){
 			
 		}
 		
-		
 	
 	
 	function save_answer(){
@@ -852,7 +852,7 @@ if(isset($_FILES['webcam'])){
 			$this->session->unset_userdata('rid');		
 	if($this->session->userdata('logged_in')){
 	redirect('result/view_result/'.$rid);				
- redirect('quiz');
+    redirect('quiz');
 	}else{
 	 redirect('quiz/open_quiz/0');	
 	}

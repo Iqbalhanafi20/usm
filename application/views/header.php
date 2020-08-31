@@ -17,8 +17,6 @@
 	
 	<!-- Custom styles for this template-->
   <link href="<?php echo base_url();?>css/sb-admin-2.min.css" rel="stylesheet">
-  <!-- data table css -->
-  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"> -->
 
 	
 	
@@ -288,6 +286,7 @@ if(in_array('All',explode(',',$logged_in['setting']))){
           
             <a class="collapse-item" href="<?php echo site_url('setting');?>"><?php echo $this->lang->line('setting');?></a>
             <a class="collapse-item" href="<?php echo site_url('notification');?>"><?php echo $this->lang->line('notification');?></a>
+            <a class="collapse-item" href="<?php echo site_url('setting/event');?>">Event</a>
             <a class="collapse-item" href="<?php echo site_url('user/group_list');?>"><?php echo $this->lang->line('group_list');?></a> 
            <a class="collapse-item" href="<?php echo site_url('qbank/category_list');?>"><?php echo $this->lang->line('category_list');?></a> 
            <a class="collapse-item" href="<?php echo site_url('qbank/level_list');?>"><?php echo $this->lang->line('level_list');?></a> 
@@ -352,11 +351,11 @@ $logged_in=$this->session->userdata('logged_in');
 	  
 	              <!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
+              <!-- <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i> -->
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter"><?php echo count($invitations)+count($notifications);?></span>
-              </a>
+                <!-- <span class="badge badge-danger badge-counter"><?php echo count($invitations)+count($notifications);?></span>
+              </a> -->
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">

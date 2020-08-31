@@ -97,8 +97,6 @@
                     <a class="small"
                       href="<?php echo site_url('login/forgot');?>"><?php echo $this->lang->line('forgot_password');?>
                     </a>
-
-
                   </div>
 
 
@@ -109,8 +107,25 @@
                     <a class="btn btn-danger btn-user btn-block"
                       href="<?php echo site_url('login/registration');?>"><?php echo $this->lang->line('register_new_account');?></a>
 
+                      <div class="text-center" style="margin-top:10px;">
+                        <!-- <div class="row">
+                          <div class="col-6"><a class="small"
+                          href="<?=base_url("upload/TATA_CARA_PELAKSANAAN_UJIAN_SARINGAN_MASUK.pdf")?>">Tata cara Pelaksanaan
+                        </a></div>
+                          <div class="col-6"><a class="small"
+                          href="<?=base_url("upload/TATA_CARA_PENDAFTARAN_AKUN_BARU_USM.pdf")?>">Tata cara Pendaftaran
+                        </a></div>
+                        </div> -->
 
-
+                        <div class="row">
+                          <div class="col-6"><a class="small"
+                          href="<?=base_url("index.php/login/download/1")?>">Tata cara Pelaksanaan
+                        </a></div>
+                          <div class="col-6"><a class="small"
+                          href="<?=base_url("index.php/login/download/2")?>">Tata cara Pendaftaran
+                        </a></div>
+                        </div>
+                      </div>
                   </div>
                 </div>
               </div>

@@ -245,6 +245,67 @@ $('#duplicate_question').css('display','none');
  <script>
 	$(document).ready(function() {
 		$('#table_id').DataTable();
+		var email = $("#email").val();
+		$(".cari").hide();
+		$("#email").keyup(function(){
+				$(".cari").show();
+		});
+		if(email!=""){
+			$.ajax({
+					type: "POST",
+					data: {
+						email:email
+					},
+					url: "<?=base_url("index.php/result/tampilhasil")?>",
+					success: function(data) {
+						$('.isi').html(data);   
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						$('.isi').html("<h1>Tidak ada data</h1>"); 
+					}
+
+				});
+				$(".cari").click(function(){
+					var email = $("#email").val();
+					
+					$.ajax({
+					type: "POST",
+					data: {
+						email:email
+					},
+					url: "<?=base_url("index.php/result/tampilhasil")?>",
+					success: function(data) {
+						$('.isi').html(data);   
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						$('.isi').html("<h1>Tidak ada data</h1>"); 
+					}
+
+				});
+			})
+		}else{
+			$(".cari").show();
+					$(".cari").click(function(){
+					var email = $("#email").val();
+					
+					$.ajax({
+					type: "POST",
+					data: {
+						email:email
+					},
+					url: "<?=base_url("index.php/result/tampilhasil")?>",
+					success: function(data) {
+						$('.isi').html(data);   
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						$('.isi').html("<h1>Tidak ada data</h1>"); 
+					}
+
+				});
+			})
+		}
+
+		
 	} );
  </script>
 </body>

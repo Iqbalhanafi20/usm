@@ -10,6 +10,7 @@ class User extends CI_Controller {
 	   $this->load->helper('url');
 	   $this->load->model("user_model");
 	   $this->load->model("account_model");
+	   $this->load->model('quiz_model');
 	   $this->lang->load('basic', $this->config->item('language'));
 		// redirect if not loggedin
 		if(!$this->session->userdata('logged_in')){
@@ -59,6 +60,8 @@ class User extends CI_Controller {
 		// fetching group list
 		$data['group_list']=$this->user_model->group_list();
 		$data['account_type']=$this->account_model->account_list(0);
+		$data['eve'] = $this->quiz_model->list_event();
+		$data['jur'] = $this->quiz_model->list_jurusan();
 		 $this->load->view('header',$data);
 		$this->load->view('new_user',$data);
 		$this->load->view('footer',$data);

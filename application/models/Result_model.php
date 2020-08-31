@@ -47,6 +47,16 @@ Class Result_model extends CI_Model
 		
 	 
  }
+
+ function get_user($email){
+	$query=$this->db->query("select * from savsoft_users where email='$email'");
+	 return $query->result();
+ }
+
+ function get_resultx($uid){
+	$query=$this->db->query("select * from savsoft_result where uid='$uid'");
+	 return $query->result();
+ }
  
  function quiz_list(){
 	 $this->db->order_by('quid','desc');

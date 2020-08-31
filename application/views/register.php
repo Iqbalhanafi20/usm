@@ -3,7 +3,7 @@
 <div class="col-md-1">
 </div>
 <div class="col-md-10">
-<a href="<?php echo base_url();?>"><img src="<?php echo base_url('images/logokkg.png');?>" style="height:3rem;width:auto"></a>
+<a href="<?php echo base_url();?>"><img style="width: 150px;" src="<?php echo base_url('images/logokkg.png');?>" style="height:3rem;width:auto"></a>
 </div>
 <div class="col-md-1">
 </div>
@@ -95,6 +95,34 @@
 					</select>
 				</div>
 
+				<div class="form-group">	 
+					<label   >Select Event</label> 
+					<select class="form-control" name="eventid"  required>
+					<?php 
+					foreach($eve as $val){
+						?>
+						
+					<option value="<?php echo $val->id;?>"><?php echo $val->event;?></option>
+						<?php 
+					}
+					?>
+					</select>
+				</div>
+
+				<div class="form-group">	 
+					<label   >Jurusan Yang Diinginkan</label> 
+					<select class="form-control" name="jurusan"  required>
+					<?php 
+					foreach($jur as $val){
+						?>
+						
+					<option value="<?php echo $val->meprogdi;?>"><?php echo $val->meprogdi." (".$val->idprogm.")";?></option>
+						<?php 
+					}
+					?>
+					</select>
+				</div>
+
  
 
 	<?php 
@@ -108,7 +136,9 @@
 	
 	<?php
 	}
-	?>			 
+	?>	
+	
+	
 
  
 	<button class="btn btn-default" type="submit"><?php echo $this->lang->line('submit');?></button>

@@ -339,9 +339,68 @@ if($result['view_answer']=='1' || $logged_in['su']=='1'){
 }else{
 	?>
 <h2 style="margin-top: 100px">"Congratulations, you have completed this USM"</h2>
-<h3 >We will inform your test results later</h3>
+<!-- <h3 >We will inform your test results later</h3> -->
+<!-- <h2 style="font-weight: bold">Your test results can be seen on the Kwik Kian Gie website</h2> -->
+<h2 style="font-weight: bold">Click the see results button to see your results test</h2>
 
-<a href="https://wa.me/6281319891111?text=Saya%20baru%20saja%20mengikuti%20USM%20Online.%20Mohon%20Info%20Selanjutnya" class="btn btn-success printbtn" style="margin-top:10px;">Contact Us</a>
+		
+
+
+<?php 
+// data yang ingin dilempar ke website KKG
+$originalDate = $result['date_result'];
+$newDate = date("d-m-Y", strtotime($originalDate));
+$waktuhasil = date('d-m-Y H:i:s',$result['start_time']);
+$beasiswa = $result['beasiswa'];
+$persentase = $result['percentage_obtained'];
+$categories = $result['categories'];
+$status = $result['result_status'];
+$startTime = $result['start_time'];
+$newTime1 = date("H:i:s", strtotime($startTime));
+$endTime = $result['end_time'];
+$newTime2 = date("H:i:s", strtotime($endTime));
+$jurusaningin = $result['jurusan_ingin'];
+$rid = $result['rid'];
+$waktumengerjakan = secintomin($result['total_time']);
+
+$event = $this->quiz_model->get_event($result['eid']);
+foreach($event as $val);
+$eventx = $val->event;
+$acara = $eventx.", ".$newDate;
+
+$c=0;
+$correct=0;
+$incorrect=0;
+$notattempted=0;
+$rca=explode(',',$result['correct_score']);
+$rica=explode(',',$result['incorrect_score']);
+foreach(explode(',',$result['categories']) as $vk => $category){ 
+$cate_sco=0;
+if(isset($cia_cat[0][$vk])){ $no_C=$cia_cat[0][$vk]; $correct+=$cia_cat[0][$vk]; }else{ $no_C=0; } 
+if(isset($cia_cat[1][$vk])){ $no_iC=$cia_cat[1][$vk]; $incorrect+=$cia_cat[1][$vk]; }else{ $no_iC=0;  }
+for($qii=$category_ranges[$vk][0]; $qii <= $category_ranges[$vk][1]; $qii++){
+					  
+					  if($ind_score[$qii]==1){
+					   $cate_sco+=$rca[$qii];
+					  }else if($ind_score[$qii]==2){
+					    $cate_sco+=$rica[$qii];
+					  }
+					   }
+					}
+$jumlahbenar = $correct;
+$jumlahsalah = $incorrect;
+
+
+?>
+
+
+<?php 
+$namalengkap = $logged_in['first_name'].' '.$logged_in['last_name'];
+$linknya = "https://wa.me/6281319891111?text=Hai%20Saya%20".$namalengkap.",%20Saya%20baru%20saja%20mengikuti%20USM%20Online.%20Mohon%20Info%20Selanjutnya";
+?>
+<!-- https://wa.me/6281319891111?text=Saya%20baru%20saja%20mengikuti%20USM%20Online.%20Mohon%20Info%20Selanjutnya -->
+<a href="<?=$linknya?>" class="btn btn-success printbtn" style="margin-top:10px;">Contact Us</a>
+<a href="https://kwikkiangie.ac.id/home/hasil-usm/" class="btn btn-warning printbtn" target="_blank" style="margin-top:10px;">See Result</a>
 	<?php
 }
 ?>
