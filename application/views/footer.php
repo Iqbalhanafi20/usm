@@ -305,6 +305,17 @@ $('#duplicate_question').css('display','none');
 			})
 		}
 
+		// hapus tahun akademik
+		$(".deltak").click(function(){
+			let tahun = $(this).attr("tahun");
+			var r = confirm("Do You Want to Delete this data ?");
+			if (r == true) {
+			window.location.href='remove_tak/'+tahun;
+			} else {
+			
+			}
+		});
+
 		
 	} );
  </script>

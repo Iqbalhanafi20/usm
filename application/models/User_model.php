@@ -236,6 +236,21 @@ return $revenue;
 	   return false;
    }
 }
+
+function update_tak($tak1){
+	$tak = $this->input->post('tak_name');
+	$userdata=array(
+   'tahun_akademik'=>$tak
+   );
+   $this->db->where('tahun_akademik',$tak1);
+   if($this->db->update('tahun_akademik',$userdata)){
+	   
+	   return true;
+   }else{
+	   
+	   return false;
+   }
+}
  
  
  function get_group($gid){
@@ -414,7 +429,8 @@ return $revenue;
 		'subscription_expired'=>strtotime($this->input->post('subscription_expired')),
 		'su'=>$this->input->post('su'),
 		'eid'=>$this->input->post('eventid'),
-		'jurusan_ingin'=>$this->input->post('jurusan')		
+		'jurusan_ingin'=>$this->input->post('jurusan'),
+		'tahun_akademik'=>$this->input->post('tak')		
 		);
 		
 		 if($logged_in['uid'] != '1'){
@@ -469,14 +485,15 @@ return $revenue;
 		'gid'=>implode(',',$this->input->post('gid')),
 		'su'=>'2',
 		'eid'=>$this->input->post('eventid'),
-		'jurusan_ingin'=>$this->input->post('jurusan')		
+		'jurusan_ingin'=>$this->input->post('jurusan'),
+		'tahun_akademik'=>$this->input->post('tak')		
 		);
 		$veri_code=rand('1111','9999');
 		 if($this->config->item('verify_email')){
 			//  verifikasi email
-			// $userdata['verify_code']=$veri_code;
+			$userdata['verify_code']=$veri_code;
 			// not verifikasi email
-			$userdata['verify_code']=0;
+			// $userdata['verify_code']=0;
 		 }
 		 		if($this->session->userdata('logged_in_raw')){
 					$userraw=$this->session->userdata('logged_in_raw');
@@ -506,49 +523,49 @@ return $revenue;
 
 		if($rresult){
 // for send email
-// if($this->config->item('verify_email')){
-// // send verification link in email
+if($this->config->item('verify_email')){
+// send verification link in email
 				 
-// $verilink=site_url('login/verify/'.$veri_code);
+$verilink=site_url('login/verify/'.$veri_code);
 
-// // send email baru
-// //Load email library
-// $this->load->library('email');
+// send email baru
+//Load email library
+$this->load->library('email');
 
-// //SMTP & mail configuration
-// $config = array(
-// 	'protocol'  => 'smtp',
-// 	'smtp_host' => $this->config->item('smtp_hostname'),
-// 	'smtp_port' => $this->config->item('smtp_port'),
-// 	'smtp_user' => $this->config->item('smtp_username'),
-// 	'smtp_pass' => $this->config->item('smtp_password'),
-// 	'mailtype'  => 'html',
-// 	'charset'   => 'utf-8'
-// );
-// $this->email->initialize($config);
-// $this->email->set_mailtype("html");
-// $this->email->set_newline("\r\n");
+//SMTP & mail configuration
+$config = array(
+	'protocol'  => 'smtp',
+	'smtp_host' => $this->config->item('smtp_hostname'),
+	'smtp_port' => $this->config->item('smtp_port'),
+	'smtp_user' => $this->config->item('smtp_username'),
+	'smtp_pass' => $this->config->item('smtp_password'),
+	'mailtype'  => 'html',
+	'charset'   => 'utf-8'
+);
+$this->email->initialize($config);
+$this->email->set_mailtype("html");
+$this->email->set_newline("\r\n");
 
-// //Email content
-// $fromemail=$this->config->item('fromemail');
-// $fromname=$this->config->item('fromname');
-// $subject=$this->config->item('activation_subject');
-// $message=$this->config->item('activation_message');;
+//Email content
+$fromemail=$this->config->item('fromemail');
+$fromname=$this->config->item('fromname');
+$subject=$this->config->item('activation_subject');
+$message=$this->config->item('activation_message');;
 			
-// $message=str_replace('[verilink]',$verilink,$message);
+$message=str_replace('[verilink]',$verilink,$message);
 
-// $this->email->to($this->input->post('email'));
-// $this->email->from($fromemail, $fromname);
-// $this->email->subject($subject);
-// $this->email->message($message);
+$this->email->to($this->input->post('email'));
+$this->email->from($fromemail, $fromname);
+$this->email->subject($subject);
+$this->email->message($message);
 
-// if(!$this->email->send()){
-// 				 print_r($this->email->print_debugger());
-// 				exit;
-// 				}
+if(!$this->email->send()){
+				 print_r($this->email->print_debugger());
+				exit;
+				}
 			 
 				 
-// 			 }
+			 }
 			//  end sending email
 			 
 			return true;
@@ -596,43 +613,80 @@ return false;
 }
 $new_password=rand('1111','9999');
 
- $this->load->library('email');
+//  $this->load->library('email');
 
- if($this->config->item('protocol')=="smtp"){
-			$config['protocol'] = 'smtp';
-			$config['smtp_host'] = $this->config->item('smtp_hostname');
-			$config['smtp_user'] = $this->config->item('smtp_username');
-			$config['smtp_pass'] = $this->config->item('smtp_password');
-			$config['smtp_port'] = $this->config->item('smtp_port');
-			$config['smtp_timeout'] = $this->config->item('smtp_timeout');
-			$config['mailtype'] = $this->config->item('smtp_mailtype');
-			$config['starttls']  = $this->config->item('starttls');
-			 $config['newline']  = $this->config->item('newline');
+//  if($this->config->item('protocol')=="smtp"){
+// 			$config['protocol'] = 'smtp';
+// 			$config['smtp_host'] = $this->config->item('smtp_hostname');
+// 			$config['smtp_user'] = $this->config->item('smtp_username');
+// 			$config['smtp_pass'] = $this->config->item('smtp_password');
+// 			$config['smtp_port'] = $this->config->item('smtp_port');
+// 			$config['smtp_timeout'] = $this->config->item('smtp_timeout');
+// 			$config['mailtype'] = $this->config->item('smtp_mailtype');
+// 			$config['starttls']  = $this->config->item('starttls');
+// 			 $config['newline']  = $this->config->item('newline');
 			
+// 			$this->email->initialize($config);
+// 		}
+// 			$fromemail=$this->config->item('fromemail');
+// 			$fromname=$this->config->item('fromname');
+// 			$subject=$this->config->item('password_subject');
+// 			$message=$this->config->item('password_message');;
+			
+// 			// $message=str_replace('[new_password]',$new_password,$message);
+// 			$link = base_url()."index.php/login/forgot_password";
+// 			$message = "Click link dibawah ini untuk mereset password anda: <br>
+// 			<a href='".$link."' target='_blank'>Reset Password<a/>";
+		
+		
+			
+// 			$this->email->to($toemail);
+// 			$this->email->from($fromemail, $fromname);
+// 			$this->email->subject($subject);
+// 			$this->email->message($message);
+
+			//Load email library
+		   $this->load->library('email');
+
+			//SMTP & mail configuration
+			$config = array(
+				'protocol'  => 'smtp',
+				'smtp_host' => $this->config->item('smtp_hostname'),
+				'smtp_port' => $this->config->item('smtp_port'),
+				'smtp_user' => $this->config->item('smtp_username'),
+				'smtp_pass' => $this->config->item('smtp_password'),
+				'mailtype'  => 'html',
+				'charset'   => 'utf-8'
+			);
 			$this->email->initialize($config);
-		}
+			$this->email->set_mailtype("html");
+			$this->email->set_newline("\r\n");
+
+			//Email content
 			$fromemail=$this->config->item('fromemail');
 			$fromname=$this->config->item('fromname');
 			$subject=$this->config->item('password_subject');
-			$message=$this->config->item('password_message');;
-			
-			$message=str_replace('[new_password]',$new_password,$message);
-		
-		
-			
-			$this->email->to($toemail);
+			$message=$this->config->item('password_message');
+						
+			// $message=str_replace('[new_password]',$new_password,$message);
+			$link = base_url()."index.php/login/forgot_password";
+			$message = "Click link dibawah ini untuk mereset password anda: <br>
+			<a class='btn btn-primary' href='".$link."' target='_blank'>Reset Password</a>";
+
+			$this->email->to($this->input->post('email'));
 			$this->email->from($fromemail, $fromname);
 			$this->email->subject($subject);
 			$this->email->message($message);
+
 			if(!$this->email->send()){
 			 //print_r($this->email->print_debugger());
-			
+			return false;
 			}else{
-			$user_detail=array(
-			'password'=>md5($new_password)
-			);
-			$this->db->where('email', $toemail);
- 			$this->db->update('savsoft_users',$user_detail);
+			// $user_detail=array(
+			// 'password'=>md5($new_password)
+			// );
+			// $this->db->where('email', $toemail);
+ 			// $this->db->update('savsoft_users',$user_detail);
 			return true;
 			}
 
@@ -771,6 +825,19 @@ $new_password=rand('1111','9999');
 	
 	
 }
+
+function remove_tak($tak){
+	 
+	$this->db->where('tahun_akademik',$tak);
+	if($this->db->delete('tahun_akademik')){
+		return true;
+	}else{
+		
+		return false;
+	}
+	
+	
+}
  
  
  
@@ -816,6 +883,20 @@ $query=$this->db->get('savsoft_users');
 	   return true;
    }else{
 	   
+	   return false;
+   }
+
+}
+
+function insert_tak(){
+	 
+	$userdata=array(
+   		'tahun_akademik'=>$this->input->post('tak_name')
+	   );
+   
+   if($this->db->insert('tahun_akademik',$userdata)){
+	   return true;
+   }else{
 	   return false;
    }
 

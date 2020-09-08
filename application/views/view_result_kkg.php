@@ -308,8 +308,35 @@ $jumlahsalah = $incorrect;
     </tr>
     <tr>
       <td style="line-height: 0.4">
+	  <?php 
+	 	 
+	  ?>
         <p style="font-size: 14px; font-weight:bold; font-color:#777777">Jurusan yang Diinginkan</p>
-        <p style="font-size: 22px; font-weight:bold;"><?=$jurusaningin?></p>
+        <p style="font-size: 22px; font-weight:bold;">
+		<?php 
+		if($jurusaningin == "AB"){
+			echo "Administrasi Bisnis";
+		}elseif($jurusaningin == "AK"){
+			echo "Akuntansi";
+		}elseif($jurusaningin == "IK"){
+			echo "Ilmu Komunikasi";
+		}elseif($jurusaningin == "MA"){
+			echo "Magister Akuntansi";
+		}elseif($jurusaningin == "MJ"){
+			echo "Manajemen";
+		}elseif($jurusaningin == "MM"){
+			echo "Magister Manajemen";
+		}elseif($jurusaningin == "MP"){
+			echo "Profesi Akuntansi";
+		}elseif($jurusaningin == "SI"){
+			echo "Sistem Informasi";
+		}elseif($jurusaningin == "TI"){
+			echo "Teknik Informatika";
+		}else{
+			echo "";
+		}
+		?>
+		</p>
       </td>
     </tr>
     <tr>

@@ -203,6 +203,7 @@ class Login extends CI_Controller {
 		// fetching group list
 		$data['group_list']=$this->user_model->group_list();
 		$data['eve'] = $this->quiz_model->list_event();
+		$data['tak'] = $this->quiz_model->list_tak();
 		$data['jur'] = $this->quiz_model->list_jurusan();
 		$this->load->view('header',$data);
 		$this->load->view('register',$data);
@@ -408,9 +409,34 @@ class Login extends CI_Controller {
 	}
 	
 	
-	
-	
+
 	function forgot(){
+		$this->load->helper('url');
+				if($this->input->post('email')){
+				$user_email=$this->input->post('email');
+				 if($this->user_model->reset_password($user_email)){
+					// $this->session->set_flashdata('message', "<div class='alert alert-success'>".$this->lang->line('password_updated')." </div>");
+
+					$this->session->set_flashdata('message', "<div class='alert alert-success'>Reset link have been sent to your email</div>");
+							
+				}else{
+					$this->session->set_flashdata('message', "<div class='alert alert-danger'>".$this->lang->line('email_doesnot_exist')." </div>");
+							
+				}
+				redirect('login/forgot');
+				}
+				
+	  
+				$data['title']=$this->lang->line('forgot_password');
+			   $this->load->view('header',$data);
+				$this->load->view('forgot_password_email',$data);
+			  $this->load->view('footer',$data);
+	
+		
+		}
+	
+	
+	function forgot_password(){
 			$this->load->helper('url');
 			
 			// if($this->input->post('email')){
@@ -434,6 +460,7 @@ class Login extends CI_Controller {
 
 	
 	}
+	
 
 	function proses_forgot(){
 		$this->load->helper('url');
@@ -446,7 +473,7 @@ class Login extends CI_Controller {
 		if($cek > 0){
 			if($password1 <> $password2){
 				$this->session->set_flashdata('message', "<div class='alert alert-danger'>Password not match</div>");
-				redirect('login/forgot');
+				redirect('login/forgot_password');
 			}else{
 				$data = array(
 					"password"=>md5($this->input->post('password1'))
@@ -464,11 +491,11 @@ class Login extends CI_Controller {
 					$this->session->set_flashdata('message', "<div class='alert alert-danger'>Update password fail</div>");
 				}
 			
-				redirect('login/forgot');
+				redirect('login/forgot_password');
 			}
 		}else{
 			$this->session->set_flashdata('message', "<div class='alert alert-danger'>".$this->lang->line('email_doesnot_exist')." </div>");
-			redirect('login/forgot');
+			redirect('login/forgot_password');
 		}
 		
 	}

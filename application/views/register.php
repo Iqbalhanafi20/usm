@@ -79,7 +79,7 @@
 				
 			// }
 			
-		?>
+		?>		
 			
 				<div class="form-group">	 
 					<label   ><?php echo $this->lang->line('select_group');?></label> 
@@ -89,6 +89,20 @@
 						?>
 						
 					<option value="<?php echo $val['gid'];?>" <?php if($val['gid']==$gid){ echo 'selected'; } ?> ><?php echo $val['group_name'];?></option>
+						<?php 
+					}
+					?>
+					</select>
+				</div>
+
+				<div class="form-group">	 
+					<label   >Tahun Akademik</label> 
+					<select class="form-control" name="tak"  required>
+					<?php 
+					foreach($tak as $val){
+						?>
+						
+					<option value="<?php echo $val->tahun_akademik;?>"><?php echo $val->tahun_akademik;?></option>
 						<?php 
 					}
 					?>
@@ -116,7 +130,7 @@
 					foreach($jur as $val){
 						?>
 						
-					<option value="<?php echo $val->meprogdi;?>"><?php echo $val->meprogdi." (".$val->idprogm.")";?></option>
+					<option value="<?php echo $val->idprogdi;?>"><?php echo $val->meprogdi." (".$val->idprogm.")";?></option>
 						<?php 
 					}
 					?>

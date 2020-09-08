@@ -124,7 +124,30 @@ class Result extends CI_Controller {
 		$result=$this->result_model->generate_report($quid,$gid);
 		$csvdata=$this->lang->line('result_id').",".$this->lang->line('email').",".$this->lang->line('first_name').",".$this->lang->line('last_name').",".$this->lang->line('group_name').",".$this->lang->line('quiz_name').",".$this->lang->line('score_obtained').",".$this->lang->line('percentage_obtained').",".$this->lang->line('status').","."Event".","."Jurusan yang diinginkan".","."Potongan Beasiswa"."\r\n";
 		foreach($result as $rk => $val){
-		$csvdata.=$val['rid'].",".$val['email'].",".$val['first_name'].",".$val['last_name'].",".$val['group_name'].",".$val['quiz_name'].",".$val['score_obtained'].",".$val['percentage_obtained'].",".$val['result_status'].",".$val['event'].",".$val['jurusan_ingin'].",".$val['beasiswa']."\r\n";
+			$jurusaningin = $val['jurusan_ingin'];
+			if($jurusaningin == "AB"){
+				$j = "Administrasi Bisnis";
+			}elseif($jurusaningin == "AK"){
+				$j = "Akuntansi";
+			}elseif($jurusaningin == "IK"){
+				$j = "Ilmu Komunikasi";
+			}elseif($jurusaningin == "MA"){
+				$j = "Magister Akuntansi";
+			}elseif($jurusaningin == "MJ"){
+				$j = "Manajemen";
+			}elseif($jurusaningin == "MM"){
+				$j = "Magister Manajemen";
+			}elseif($jurusaningin == "MP"){
+				$j = "Profesi Akuntansi";
+			}elseif($jurusaningin == "SI"){
+				$j = "Sistem Informasi";
+			}elseif($jurusaningin == "TI"){
+				$j = "Teknik Informatika";
+			}else{
+				$j = "";
+			}
+
+		$csvdata.=$val['rid'].",".$val['email'].",".$val['first_name'].",".$val['last_name'].",".$val['group_name'].",".$val['quiz_name'].",".$val['score_obtained'].",".$val['percentage_obtained'].",".$val['result_status'].",".$val['event'].",".$j.",".$val['beasiswa']."\r\n";
 		}
 		$filename=time().'.csv';
 		force_download($filename, $csvdata);

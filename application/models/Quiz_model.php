@@ -63,6 +63,11 @@ Class Quiz_model extends CI_Model
 	 return $query->result();
  }
 
+ function list_tak(){
+	$query=$this->db->query("select * from tahun_akademik group by tahun_akademik order by tahun_akademik desc");
+	 return $query->result();
+ }
+
  function list_jurusan(){
 	$query=$this->db->query("select * from jurusan order by idprogm");
 	 return $query->result();
@@ -70,6 +75,11 @@ Class Quiz_model extends CI_Model
 
  function get_event($id){
 	$query=$this->db->query("select * from savsoft_event where id='$id'");
+	 return $query->result();
+ }
+
+ function get_tak($tak){
+	$query=$this->db->query("select * from tahun_akademik where tahun_akademik='$tak' group by tahun_akademik");
 	 return $query->result();
  }
  
@@ -774,7 +784,7 @@ function saved_answers($rid){
 		
 	}
 
-	// perhitungan beasiswa
+	// perhitungan beasiswa untuk USM
 	$nilai = number_format($percentage_obtained,1);
 	// diatas 85% maka akan mendapat diskon 50%
 	if($nilai>=85.0){

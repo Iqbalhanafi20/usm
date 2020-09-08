@@ -57,6 +57,20 @@ class Setting extends CI_Controller {
 		$this->load->view('footer',$data);
 	}
 
+	public function tahun_akademik(){
+		$logged_in=$this->session->userdata('logged_in');
+                        $setting_p=explode(',',$logged_in['setting']);
+			if(!in_array('All',$setting_p)){
+			exit($this->lang->line('permission_denied'));
+		}
+		$data['title']="Setting Tahun Akademik";
+		// fetching group list
+		$data['tak'] = $this->Quiz_model->list_tak();
+		$this->load->view('header',$data);
+		$this->load->view('tak_list',$data);
+		$this->load->view('footer',$data);
+	}
+
 	public function add_new_event(){
 		$logged_in=$this->session->userdata('logged_in');
 					$setting_p=explode(',',$logged_in['setting']);
@@ -83,6 +97,32 @@ class Setting extends CI_Controller {
 
 }
 
+public function add_new_tak(){
+	$logged_in=$this->session->userdata('logged_in');
+				$setting_p=explode(',',$logged_in['setting']);
+	if(!in_array('All',$setting_p)){
+	exit($this->lang->line('permission_denied'));
+	}
+	
+	
+	
+if($this->input->post('tak_name')){
+if($this->user_model->insert_tak()){
+				$this->session->set_flashdata('message', "<div class='alert alert-success'>".$this->lang->line('data_added_successfully')." </div>");
+			}else{
+				$this->session->set_flashdata('message', "<div class='alert alert-danger'>".$this->lang->line('error_to_update_data')." </div>");
+				
+			}
+			redirect('setting/tahun_akademik');
+}
+// fetching group list
+$data['title']="Add Tahun Akademik";
+$this->load->view('header',$data);
+$this->load->view('add_tak',$data);
+$this->load->view('footer',$data);
+
+}
+
 public function pre_remove_event($id){
 	$data['id']=$id;
 	// fetching group list
@@ -103,8 +143,6 @@ public function remove_event($gid){
 			
                         // $mgid=$this->input->post('mgid');
                         // $this->db->query(" update savsoft_users set gid='$mgid' where gid='$gid' ");
-                        
-			echo $gid;
 			
 			if($this->user_model->remove_event($gid)){
                         $this->session->set_flashdata('message', "<div class='alert alert-success'>".$this->lang->line('removed_successfully')." </div>");
@@ -113,6 +151,21 @@ public function remove_event($gid){
 						
 					}
 					redirect('setting/event');
+}
+
+public function remove_tak($val1,$val2){
+	$logged_in=$this->session->userdata('logged_in');
+                        $acp=explode(',',$logged_in['setting']);
+			if(!in_array('All',$acp)){
+			exit($this->lang->line('permission_denied'));
+			}
+	$tak = $val1."/".$val2;
+	if($this->user_model->remove_tak($tak)){
+		$this->session->set_flashdata('message', "<div class='alert alert-success'>".$this->lang->line('removed_successfully')." </div>");
+	}else{
+		$this->session->set_flashdata('message', "<div class='alert alert-danger'>".$this->lang->line('error_to_remove')." </div>");
+	}
+	redirect('setting/tahun_akademik');
 }
 
 public function edit_event($id){
@@ -132,17 +185,33 @@ if($this->user_model->update_event($id)){
 			redirect('setting/event');
 }
 
+}
+
+
+public function edit_tak($val1,$val2){
+	$logged_in=$this->session->userdata('logged_in');
+				$setting_p=explode(',',$logged_in['setting']);
+	if(!in_array('All',$setting_p)){
+	exit($this->lang->line('permission_denied'));
+	}
+$tak = $val1."/".$val2;
+if($this->input->post('tak_name')){
+	
+	if($this->user_model->update_tak($this->input->post('tak'))){
+					$this->session->set_flashdata('message', "<div class='alert alert-success'>".$this->lang->line('data_updated_successfully')." </div>");
+				}else{
+						$this->session->set_flashdata('message', "<div class='alert alert-danger'>".$this->lang->line('error_to_update_data')." </div>");
+					
+				}
+				redirect('setting/tahun_akademik');
+}
 // fetching group list
-$data['eve']=$this->Quiz_model->get_event($id);
-$data['id']=$id;
-$data['title']="Edit Event";
+$data['eve']=$this->Quiz_model->get_tak($tak);
+$data['tak']=$tak;
+$data['title']="Edit Tahun Akademik";
 $this->load->view('header',$data);
-$this->load->view('edit_event',$data);
+$this->load->view('edit_tak',$data);
 $this->load->view('footer',$data);
-
-
-
-
 }
 
 

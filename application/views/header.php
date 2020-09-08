@@ -284,10 +284,11 @@ if(in_array('All',explode(',',$logged_in['setting']))){
         <div id="collapseSetting" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
           
-            <a class="collapse-item" href="<?php echo site_url('setting');?>"><?php echo $this->lang->line('setting');?></a>
-            <a class="collapse-item" href="<?php echo site_url('notification');?>"><?php echo $this->lang->line('notification');?></a>
-            <a class="collapse-item" href="<?php echo site_url('setting/event');?>">Event</a>
-            <a class="collapse-item" href="<?php echo site_url('user/group_list');?>"><?php echo $this->lang->line('group_list');?></a> 
+           <a class="collapse-item" href="<?php echo site_url('setting');?>"><?php echo $this->lang->line('setting');?></a>
+           <a class="collapse-item" href="<?php echo site_url('notification');?>"><?php echo $this->lang->line('notification');?></a>
+           <a class="collapse-item" href="<?php echo site_url('setting/event');?>">Event</a>
+           <a class="collapse-item" href="<?php echo site_url('setting/tahun_akademik');?>">Tahun Akademik</a>
+           <a class="collapse-item" href="<?php echo site_url('user/group_list');?>"><?php echo $this->lang->line('group_list');?></a> 
            <a class="collapse-item" href="<?php echo site_url('qbank/category_list');?>"><?php echo $this->lang->line('category_list');?></a> 
            <a class="collapse-item" href="<?php echo site_url('qbank/level_list');?>"><?php echo $this->lang->line('level_list');?></a> 
            <a class="collapse-item" href="<?php echo site_url('account');?>"><?php echo $this->lang->line('account_type');?></a></a> 

@@ -102,6 +102,7 @@ foreach($group_list as $gk => $group){
  <th>Event</th>
  <th><?php echo $this->lang->line('percentage_obtained');?></th>
  <th>Beasiswa</th>
+ <th>Jurusan ingin</th>
 <th><?php echo $this->lang->line('action');?> </th>
 </tr>
 <?php 
@@ -116,6 +117,28 @@ if(count($result)==0){
 }
 
 foreach($result as $key => $val){
+	$jurusaningin = $val['jurusan_ingin'];
+			if($jurusaningin == "AB"){
+				$j = "Administrasi Bisnis";
+			}elseif($jurusaningin == "AK"){
+				$j = "Akuntansi";
+			}elseif($jurusaningin == "IK"){
+				$j = "Ilmu Komunikasi";
+			}elseif($jurusaningin == "MA"){
+				$j = "Magister Akuntansi";
+			}elseif($jurusaningin == "MJ"){
+				$j = "Manajemen";
+			}elseif($jurusaningin == "MM"){
+				$j = "Magister Manajemen";
+			}elseif($jurusaningin == "MP"){
+				$j = "Profesi Akuntansi";
+			}elseif($jurusaningin == "SI"){
+				$j = "Sistem Informasi";
+			}elseif($jurusaningin == "TI"){
+				$j = "Teknik Informatika";
+			}else{
+				$j = "";
+			}
 ?>
 <tr>
 	<td><?php echo $val['rid'];?></td>
@@ -136,6 +159,7 @@ foreach($result as $key => $val){
 	</td>
 	<td><?php echo number_format($val['percentage_obtained'],1);?>%</td>
 	<td><?php echo $val['beasiswa'];?></td>
+	<td><?php echo $j;?></td>
 	<td>
 	<a href="<?php echo site_url('result/view_result/'.$val['rid']);?>" class="btn btn-success" ><?php echo $this->lang->line('view');?> </a>
 	<?php 

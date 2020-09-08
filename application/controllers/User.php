@@ -62,6 +62,7 @@ class User extends CI_Controller {
 		$data['account_type']=$this->account_model->account_list(0);
 		$data['eve'] = $this->quiz_model->list_event();
 		$data['jur'] = $this->quiz_model->list_jurusan();
+		$data['tak'] = $this->quiz_model->list_tak();
 		 $this->load->view('header',$data);
 		$this->load->view('new_user',$data);
 		$this->load->view('footer',$data);
