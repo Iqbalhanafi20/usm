@@ -363,12 +363,18 @@ $jumlahsalah = $incorrect;
         <p style="font-size: 22px; font-weight:bold;"><?=$persentase?>%</p>
       </td>
     </tr>
+	<?php 
+	if($quidd != 8){
+	?>
+
     <tr>
       <td style="line-height: 0.4">
         <p style="font-size: 14px; font-weight:bold; font-color:#777777">Beasiswa</p>
         <p style="font-size: 22px; font-weight:bold;"><?=$beasiswa?></p>
       </td>
     </tr>
+
+	<?php } ?>
     <!-- <tr>
     <?php 
     $url = "http://172.16.0.40:105/usm2pmb.php?uid=".$result['uid'];
