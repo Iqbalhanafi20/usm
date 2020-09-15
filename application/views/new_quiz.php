@@ -24,11 +24,18 @@
 		?>	
 		
 		
-		 			<div class="form-group">	 
+		 	<div class="form-group">	 
 					<label for="inputEmail" class="sr-only"><?php echo $this->lang->line('quiz_name');?></label> 
 					<input type="text"  name="quiz_name"  class="form-control" placeholder="<?php echo $this->lang->line('quiz_name');?>"  required autofocus>
 			</div>
-				<div class="form-group">	 
+			<div class="form-group">
+			<label for="inputEmail"  >Beasiswa</label> 
+				<div class="row">
+					<div class="col-md-3"><input type="radio" name="beasiswa" value='yes'>&nbsp<span>Yes</span></div>
+					<div class="col-md-3"><input type="radio" name="beasiswa" value='no'>&nbsp<span>No</span></div>
+				</div>
+			</div>
+			<div class="form-group">	 
 					<label for="inputEmail"  ><?php echo $this->lang->line('description');?></label> 
 					<textarea   name="description"  class="form-control tinymce_textarea" ></textarea>
 			</div>

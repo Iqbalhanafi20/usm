@@ -54,6 +54,13 @@ if(!$this->session->flashdata('addquestion')){
 					<label for="inputEmail" ><?php echo $this->lang->line('quiz_name');?></label> 
 					<input type="text"  name="quiz_name"  value="<?php echo $quiz['quiz_name'];?>" class="form-control" placeholder="<?php echo $this->lang->line('quiz_name');?>"  required autofocus>
 			</div>
+			<div class="form-group">
+			<label for="inputEmail">Beasiswa</label> 
+				<div class="row">
+					<div class="col-md-3"><input type="radio" name="beasiswa" value='yes' <?php if($quiz['beasiswa']=="yes"){echo "checked";} ?>>&nbsp<span>Yes</span></div>
+					<div class="col-md-3"><input type="radio" name="beasiswa" value='no' <?php if($quiz['beasiswa']=="no"){echo "checked";} ?>>&nbsp<span>No</span></div>
+				</div>
+			</div>
 				<div class="form-group">	 
 					<label for="inputEmail"  ><?php echo $this->lang->line('description');?></label> 
 					<textarea   name="description"  class="form-control tinymce_textarea" ><?php echo $quiz['description'];?></textarea>
