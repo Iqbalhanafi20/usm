@@ -262,6 +262,7 @@ class Result extends CI_Controller {
 
 	function tampilhasil(){
 		$email = $this->input->post("email");
+		// $email = "iqbalhanafi22@yahoo.co.id";
 		$getuser=$this->result_model->get_user($email);
 		foreach($getuser as $val);
 		$getresult=$this->result_model->get_resultx($val->uid);
@@ -330,7 +331,11 @@ class Result extends CI_Controller {
 		  
 		  $uid=$data['result']['uid'];
 		  $quid=$data['result']['quid'];
+		  $dataquiz = $this->result_model->get_quiz($quid);
+
+		  $data['beas'] = $dataquiz->beasiswa_pilihan;
 		  $data['quidd'] = $quid;
+
 		  
 			if($this->session->userdata('logged_in')){
 			$this->load->view('view_result_kkg',$data);

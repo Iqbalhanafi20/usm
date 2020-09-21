@@ -184,7 +184,7 @@ Class Quiz_model extends CI_Model
 	 'gids'=>implode(',',$this->input->post('gids')),
 	 'uids'=>implode(',',$this->input->post('uids')),
 	 'question_selection'=>$this->input->post('question_selection'),
-	 'beasiswa'=>$this->input->post('beasiswa')
+	 'beasiswa_pilihan'=>$this->input->post('beasiswa')
 	 );
 	 	$userdata['gen_certificate']=$this->input->post('gen_certificate'); 
 	 	  $logged_in=$this->session->userdata('logged_in');
@@ -223,7 +223,7 @@ Class Quiz_model extends CI_Model
 	 'show_chart_rank'=>$this->input->post('show_chart_rank'),
       'uids'=>implode(',',$this->input->post('uids')),
 	 'gids'=>implode(',',$this->input->post('gids')),
-	 'beasiswa'=>$this->input->post('beasiswa')
+	 'beasiswa_pilihan'=>$this->input->post('beasiswa')
 	 );
 	  	 	 
 		$userdata['gen_certificate']=$this->input->post('gen_certificate'); 

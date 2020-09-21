@@ -250,7 +250,7 @@ $originalDate = $result['date_result'];
 $newDate = date("d-m-Y", strtotime($originalDate));
 $waktuhasil = date('d-m-Y H:i:s',$result['start_time']);
 $beasiswa = $result['beasiswa'];
-$persentase = $result['percentage_obtained'];
+$persentase = number_format($result['percentage_obtained'],1);
 $categories = $result['categories'];
 $status = $result['result_status'];
 $startTime = $result['start_time'];
@@ -364,7 +364,7 @@ $jumlahsalah = $incorrect;
       </td>
     </tr>
 	<?php 
-	if($quidd != 8){
+	if($beas == "yes"){
 	?>
 
     <tr>

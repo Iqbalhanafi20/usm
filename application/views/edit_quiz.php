@@ -57,8 +57,8 @@ if(!$this->session->flashdata('addquestion')){
 			<div class="form-group">
 			<label for="inputEmail">Beasiswa</label> 
 				<div class="row">
-					<div class="col-md-3"><input type="radio" name="beasiswa" value='yes' <?php if($quiz['beasiswa']=="yes"){echo "checked";} ?>>&nbsp<span>Yes</span></div>
-					<div class="col-md-3"><input type="radio" name="beasiswa" value='no' <?php if($quiz['beasiswa']=="no"){echo "checked";} ?>>&nbsp<span>No</span></div>
+					<div class="col-md-3"><input type="radio" name="beasiswa" value='yes' <?php if($quiz['beasiswa_pilihan']=="yes"){echo "checked";} ?>>&nbsp<span>Yes</span></div>
+					<div class="col-md-3"><input type="radio" name="beasiswa" value='no' <?php if($quiz['beasiswa_pilihan']=="no"){echo "checked";} ?>>&nbsp<span>No</span></div>
 				</div>
 			</div>
 				<div class="form-group">	 

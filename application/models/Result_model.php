@@ -48,9 +48,14 @@ Class Result_model extends CI_Model
 	 
  }
 
+ public function get_quiz($quid){
+	return $this->db->query("SELECT * from savsoft_quiz where quid='$quid'")->row();
+}
+
  public function get_event($eid){
 	 return $this->db->query("SELECT * from savsoft_event where id='$eid'")->result();
  }
+ 
 
  function get_user($email){
 	$query=$this->db->query("select * from savsoft_users where email='$email'");
