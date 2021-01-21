@@ -231,6 +231,9 @@ class Result extends CI_Controller {
 	  
 	  $uid=$data['result']['uid'];
 	  $quid=$data['result']['quid'];
+	  $dataquiz = $this->result_model->get_quiz($quid);
+
+	  $data['beas'] = $dataquiz->beasiswa_pilihan;
 	  
 	  
 		$this->load->view('header',$data);

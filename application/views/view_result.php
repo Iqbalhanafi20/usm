@@ -338,12 +338,22 @@ if($result['view_answer']=='1' || $logged_in['su']=='1'){
 <?php 
 }else{
 	?>
-<h2 style="margin-top: 100px">"Congratulations, you have completed this USM"</h2>
-<!-- <h3 >We will inform your test results later</h3> -->
-<!-- <h2 style="font-weight: bold">Your test results can be seen on the Kwik Kian Gie website</h2> -->
-<h2 style="font-weight: bold">Click the see results button to see your results test</h2>
 
-		
+<h2 style="margin-top: 100px">"Congratulations, you have completed this USM"</h2>
+<?php 
+if($beas=="no"){
+	?>
+<!-- khusus S2 -->
+<h3 >We will inform your test results later</h3>
+	<?php
+}elseif($beas=="yes"){
+	?>
+<!-- khusus S1 -->
+<h2 style="font-weight: bold">Click the see results button to see your results test</h2>
+	<?php
+}
+?>
+	
 
 
 <?php 
@@ -400,8 +410,22 @@ $linknya = "https://wa.me/6281319891111?text=Hai%20Saya%20".$namalengkap.",%20Sa
 ?>
 <!-- https://wa.me/6281319891111?text=Saya%20baru%20saja%20mengikuti%20USM%20Online.%20Mohon%20Info%20Selanjutnya -->
 <a href="<?=$linknya?>" class="btn btn-success printbtn" style="margin-top:10px;">Contact Us</a>
+<?php 
+if($beas=="no"){
+	?>
+<!-- khusus S2 -->
+
+	<?php
+}elseif($beas=="yes"){
+	?>
+<!-- khusus S1 -->
 <a href="https://kwikkiangie.ac.id/home/hasil-usm/" class="btn btn-warning printbtn" target="_blank" style="margin-top:10px;">See Result</a>
 	<?php
+}
+?>
+
+
+<?php
 }
 ?>
 
